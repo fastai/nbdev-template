@@ -17,6 +17,7 @@ serve:
 	quarto preview
 
 docs: $(SRC)
+	nbprocess_export
 	nbprocess_quarto
 
 test:
