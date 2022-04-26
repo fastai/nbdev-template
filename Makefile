@@ -18,6 +18,7 @@ serve:
 
 docs: $(SRC)
 	nbprocess_export
+	pip install -e .
 	nbprocess_quarto
 
 test:
