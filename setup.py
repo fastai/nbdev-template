@@ -50,6 +50,8 @@ setuptools.setup(
     entry_points = {
         'console_scripts': cfg.get('console_scripts','').split(),
         'mkdocs.plugins': [ 'rm_num_prefix = nbprocess.mkdocs:RmNumPrefix' ],
-        'nbdev': [f'index={cfg.get("lib_path")}._nbdev']
+        'nbprocess': [f'{cfg.get("lib_path")}={cfg.get("lib_path")}._modidx:d']
     },
     **setup_cfg)
+
+
