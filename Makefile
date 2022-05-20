@@ -22,7 +22,7 @@ docs: .FORCE
 	nbprocess_quarto
 
 test:
-	nbdev_test_nbs
+	nbprocess_test
 
 release: pypi conda_release
 	nbdev_bump_version
