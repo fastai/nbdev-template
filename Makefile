@@ -24,7 +24,10 @@ docs: .FORCE
 test:
 	nbprocess_test
 
-release: pypi conda_release
+release-all: pypi conda_release
+	nbdev_bump_version
+
+release-pypi: pypi
 	nbdev_bump_version
 
 conda_release:
