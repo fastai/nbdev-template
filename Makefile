@@ -1,10 +1,6 @@
 .ONESHELL:
 SHELL := /bin/bash
-SRC = $(wildcard nbs/*.ipynb)
-
-nbprocess: $(SRC)
-	nbprocess_export
-	touch nbprocess
+.DEFAULT_GOAL := help
 
 sync:
 	nbprocess_update
@@ -12,22 +8,25 @@ sync:
 deploy: docs
 	nbprocess_ghp_deploy
 
-serve:
+preview:
 	nbprocess_sidebar
 	quarto preview
 
 docs: .FORCE
 	nbprocess_export
-	pip install -e .
 	nbprocess_quarto
+
+prepare: test
+	nbprocess_clean
+	nbprocess_export
 
 test:
 	nbprocess_test
 
-release-all: pypi conda_release
+release_all: pypi conda_release
 	nbdev_bump_version
 
-release-pypi: pypi
+release_pypi: pypi
 	nbdev_bump_version
 
 conda_release:
@@ -42,11 +41,14 @@ dist: clean
 clean:
 	rm -rf dist
 	
-
 install: install_quarto
 	pip install -e .
 
 install_quarto: .FORCE
 	./install_quarto.sh
 
+
 .FORCE:
+
+help:
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
