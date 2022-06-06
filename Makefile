@@ -16,7 +16,7 @@ deploy: docs ## Push local docs to gh-pages branch
 preview: ## Live preview quarto docs with hot reloading.
 	nbprocess_sidebar
 	nbprocess_export
-	nbprocess_quarto --preview
+	IN_TEST=1 &&  nbprocess_quarto --preview
 
 docs: .FORCE ## Build quarto docs and put them into folder specified in `doc_path` in settings.ini
 	nbprocess_export
