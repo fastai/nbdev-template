@@ -49,11 +49,11 @@ clean:
 	rm -rf dist
 	
 install: install_quarto ## Install quarto and the latest version of the local python pckage as an editable install
-	pip install -e .
+	pip install -e .[dev]
 
 install_py: .FORCE
 	nbprocess_export
-	pip install -e .
+	pip install -e .[dev]
 
 install_quarto: .FORCE ## Install the latest version of quarto for Mac and Linux.  Go to https://quarto.org/docs/get-started/ for Windows.
 	./install_quarto.sh
