@@ -1,7 +1,7 @@
 .ONESHELL:
 SHELL := /bin/bash
 
-exp:
+nbprocess:
 	nbprocess_export
 
 help: ## Show this help
@@ -13,19 +13,16 @@ sync: ## Propagates any change in the modules (.py files) to the notebooks that 
 deploy: docs ## Push local docs to gh-pages branch
 	nbprocess_ghp_deploy
 
-preview: ## Live preview quarto docs with hot reloading.
+preview: .install ## Live preview quarto docs with hot reloading.
 	nbprocess_sidebar
-	nbprocess_export
 	IN_TEST=1 &&  nbprocess_quarto --preview
 
 docs: .FORCE ## Build quarto docs and put them into folder specified in `doc_path` in settings.ini
 	nbprocess_export
 	nbprocess_quarto
 
-prepare: ## Export notebooks to python modules, test code and clean notebooks.
-	nbprocess_export
-	nbprocess_test
-	nbprocess_clean
+docs: .install
+	nbprocess_quarto
 	
 test: ## Test notebooks
 	nbprocess_test
@@ -51,11 +48,11 @@ clean:
 install: install_quarto ## Install quarto and the latest version of the local python pckage as an editable install
 	pip install -e ".[dev]"
 
-install_py: .FORCE
-	nbprocess_export
-	pip install -e ".[dev]"
+.install: install_quarto nbprocess
+	pip install -e .[dev]
+	touch .install
 
-install_quarto: .FORCE ## Install the latest version of quarto for Mac and Linux.  Go to https://quarto.org/docs/get-started/ for Windows.
+install_quarto:
 	./install_quarto.sh
 
 .FORCE:
