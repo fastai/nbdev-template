@@ -1,5 +1,5 @@
 
-ipynb-filters: [nbprocess_filter]
+ipynb-filters: [nbdev_filter]
 
 project:
   type: website
@@ -15,11 +15,11 @@ format:
     toc: true
 
 website:
-  title: "nbprocess"
+  title: "nbdev"
   twitter-card: true
   reader-mode: true
   repo-branch: master
-  repo-url: https://github.com/fastai/nbprocess
+  repo-url: https://github.com/fastai/nbdev
   repo-actions: [issue]
   navbar:
     background: primary
@@ -29,7 +29,7 @@ website:
         file: index.ipynb
     right:
       - icon: github
-        href: https://github.com/fastai/nbprocess/
+        href: https://github.com/fastai/nbdev/
   sidebar:
     style: "floating"
 
