@@ -20,7 +20,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install git+https://github.com/fastai/nbprocess.git
+          python -m pip install git+https://github.com/fastai/nbdev.git
       - name: Build website
         run: nbprocess_docs
       - name: Deploy to GitHub Pages
