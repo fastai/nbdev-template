@@ -22,7 +22,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install git+https://github.com/fastai/nbdev.git
       - name: Build website
-        run: nbprocess_docs
+        run: nbdev_docs
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
