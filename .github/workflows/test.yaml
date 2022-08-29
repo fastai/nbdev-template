@@ -4,4 +4,14 @@ on:  [workflow_dispatch, pull_request, push]
 jobs:
   test:
     runs-on: ubuntu-latest
-    steps: [uses: fastai/workflows/nbdev-ci@master]
+    steps: 
+    - uses: fastai/workflows/nbdev-ci@master
+    - name: Enable GitHub Pages
+      shell: python
+      run: |
+        from ghapi.core import GhApi
+        from nbdev.config import get_config
+        cfg = get_config()
+        api = GhApi(owner=cfg.user, repo=cfg.repo, token="${{secrets.GITHUB_TOKEN}}")
+        api.enable_pages(branch='gh-pages')
+ 
