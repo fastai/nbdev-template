@@ -1,0 +1,39 @@
+[tool.pdm]
+
+[project]
+name = "{lib_name}"
+version = "0.0.1"
+description = "{description}"
+authors = [
+    {name = "{author}", email = "{author_email}"},
+]
+dependencies = []
+requires-python = ">=3.7"
+readme = "README.md"
+license = {text = "Apache Software License 2.0"}
+keywords = ["{keywords}"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+]
+
+[project.urls]
+Homepage = "https://github.com/{user}/{repo}/"
+
+[project.optional-dependencies]
+dev = []
+
+[project.scripts]
+
+[project.entry-points.nbdev]
+"{lib_name}" = "{lib_name}._modidx:d"
+
+[build-system]
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"
