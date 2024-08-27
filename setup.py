@@ -8,7 +8,6 @@ config = ConfigParser(delimiters=['='])
 config.read('settings.ini', encoding='utf-8')
 cfg = config['DEFAULT']
 
-# NOTE: package_data is missing from here
 cfg_keys = 'version description keywords author author_email'.split()
 expected = cfg_keys + "lib_name user branch license status min_python audience language".split()
 for o in expected: assert o in cfg, "missing expected setting: {}".format(o)
@@ -31,7 +30,6 @@ min_python = cfg['min_python']
 lic = licenses.get(cfg['license'].lower(), (cfg['license'], None))
 dev_requirements = (cfg.get('dev_requirements') or '').split()
 
-# NOTE: handle package_data here e.g. in settings.ini `package_data = ../data/defaults.yml`
 package_data = dict()
 pkg_data = cfg.get('package_data', None)
 if pkg_data:
@@ -49,7 +47,7 @@ setuptools.setup(
     ] + ['Programming Language :: Python :: '+o for o in py_versions[py_versions.index(min_python):]] + (['License :: ' + lic[1] ] if lic[1] else []),
     url = cfg['git_url'],
     packages = setuptools.find_packages(),
-    include_package_data = True,             # NOTE: unclear if this automatically determines package data and if so how
+    include_package_data = True,
     install_requires = requirements,
     extras_require={ 'dev': dev_requirements },
     dependency_links = cfg.get('dep_links','').split(),
